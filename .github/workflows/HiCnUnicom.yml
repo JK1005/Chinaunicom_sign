@@ -1,0 +1,31 @@
+name: 联通掌厅签到
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 30 04,23 * * ?
+    
+jobs:
+  run-it:
+    runs-on: ubuntu-latest
+    name: 联通掌厅签到
+    if: github.event.repository.owner.id == github.event.sender.id
+    steps:
+        - name: Checkout codes
+          uses: actions/checkout@v2
+          
+        - name: 运行时间
+          run: |
+            time=$(curl "http://quan.suning.com/getSysTime.do")
+            echo -e ${time}
+ 
+        - name: 联通掌厅签到
+          env:
+            user: ${{ secrets.USER }}
+            appid: ${{ secrets.APPID }}
+          run: |
+            for u in $user
+            do
+              bash CnUnicom.sh ${u/,/ }
+            done
+

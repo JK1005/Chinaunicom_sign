@@ -25,7 +25,7 @@ UA="Mozilla/5.0 (Linux; Android 6.0.1; oneplus a5010 Build/V417IR; wv) AppleWebK
 #UA="ChinaUnicom4.x/176 CFNetwork/1121.2.2 Darwin/19.2.0"
 
 # workdir
-workdir="$(pwd)/CnUnicom_$username"
+workdir="$(pwd)/CnUnicom_tmp"
 [[ ! -d "$workdir" ]] && mkdir $workdir
 
 function rsaencrypt() {
@@ -78,14 +78,14 @@ EOF
 
     # cookie
     #curl -X POST -sA "$UA" -b $workdir/cookie -c $workdir/cookie "https://m.client.10010.com/mobileService/customer/query/getMyUnicomDateTotle.htm?yw_code=&mobile=$username&version=android%40$unicom_version" | grep -oE "infoDetail" >/dev/null && status=0 || status=1
-    #[[ $status == 0 ]] && echo cookies登录$username成功
+    #[[ $status == 0 ]] && echo "cookies登录1*******${username:0-4}成功"
     
     #if [[ $status == 1 ]]; then
         curl -X POST -sA "$UA" -c $workdir/cookie "https://m.client.10010.com/mobileService/logout.htm?&desmobile=$username&version=android%40$unicom_version" >/dev/null
         curl -sA "$UA" -b $workdir/cookie -c $workdir/cookie -d @$workdir/signdata "https://m.client.10010.com/mobileService/login.htm" >/dev/null
         token=$(cat $workdir/cookie | grep -E "a_token" | awk  '{print $7}')
         [[ "$token" = "" ]] && echo "Error, login failed." && echo "cmd for clean: rm -rf $workdir" && exit 1
-        echo 密码登录$username成功
+        echo "密码登录1*******${username:0-4}成功"
     #fi
 }
 
@@ -218,7 +218,7 @@ function main() {
     jfdouble
     #openChg
     #rm -rf $workdir
-    echo; echo $(date) $username Accomplished.  Thanks!
+    echo; echo $(date) 1*******${username:0-4} Accomplished.  Thanks!
 }
 
 main

@@ -1,11 +1,4 @@
-# HiCnUnicom
 
-## 使用方法
-
-### 1. Fork 本仓库
-
-
-### 2. 授权仓库可运行Action
 
 ![](https://github.com/peng4740/HiCnUnicom/raw/master/assets/actions1.png)
 ![](https://github.com/peng4740/HiCnUnicom/raw/master/assets/actions2.png)
